@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registered Players</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Set a fixed height for the card body to enable scrolling */
+        .card-body {
+            max-height: 400px;
+            /* Adjust the height as needed */
+            overflow-y: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary text-white fixed-top">
+        <a class="navbar-brand" href="#">Player Management</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'register_player' %}">Register Player</a>
+                </li>
+
+                <li>
+
+                    <div>
+                        {% if user.is_authenticated %}
+                        <form method="POST" action="{% url 'logout' %}" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-outline-light">Logout</button>
+                        </form>
+                        {% else %}
+                        <a href="{% url 'login' %}" class="btn btn-outline-light">Login</a>
+                        {% endif %}
+                    </div>
+                </li>
+
+            </ul>
+            
+
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container-fluid mt-5 p-5">
+        <h3 class="mb-4">List of Registered Players</h3>
+
+        <!-- Search Bar -->
+        <form class="form-inline mb-4" method="GET" action="{% url 'player_list' %}">
+            <input class="form-control mr-sm-2" type="search" name="q" placeholder="Search by name or sport"
+                aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+
+        <!-- Player Table inside a Card -->
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-striped table-hover table-bordered">
+                    <thead class="bg-success text-white sticky">
+                        <tr>
+                            <th>ID</th>
+                            <th>Student Name</th>
+                            <th>Student Number</th>
+                            <th>Date of Birth</th>
+                            <th>Sex</th>
+                            <th>A Level School</th>
+                            <th>Course of Study</th>
+                            <th>Year of Study</th>
+                            <th>Hall of Residence</th>
+                            <th>Main Sport</th>
+                            <th>Alternative Sport</th>
+                            <th>Playing Experience</th>
+                            <th>Position</th>
+                            <th>Current Club</th>
+                            <th>Contact Information</th>
+                            <th>Next of Kin Name</th>
+                            <th>Next of Kin Contacts</th>
+                            <th>Medical Info</th>
+                            <th>Injury History</th>
+                            <th>Registration Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for player in players %}
+                        <tr>
+                            <td>{{ player.id }}</td>
+                            <td>{{ player.student_name }}</td>
+                            <td>{{ player.student_number }}</td>
+                            <td>{{ player.dob }}</td>
+                            <td>{{ player.sex }}</td>
+                            <td>{{ player.A_Level_School }}</td>
+                            <td>{{ player.course_of_study }}</td>
+                            <td>{{ player.year_of_study }}</td>
+                            <td>{{ player.Hall_of_Residence }}</td>
+                            <td>{{ player.main_sport }}</td>
+                            <td>{{ player.alternative_sport }}</td>
+                            <td>{{ player.playing_experience }}</td>
+                            <td>{{ player.position }}</td>
+                            <td>{{ player.current_club }}</td>
+                            <td>{{ player.contact_information }}</td>
+                            <td>{{ player.next_of_kin_name }}</td>
+                            <td>{{ player.next_of_kin_contacts }}</td>
+                            <td>{{ player.food_allergy }}</td>
+                            <td>{{ player.injury_history }}</td>
+                            <td>{{ player.registration_date }}</td>
+                            <td>
+                                <!-- Update and Delete Buttons -->
+                                <a href="{% url 'update_player' player.id %}" class="btn btn-primary btn-sm">Update</a>
+                                <form action="{% url 'delete_player' player.id %}" method="POST"
+                                    style="display:inline;">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.com/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

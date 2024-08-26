@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Player</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #bdf1d3;
+            background-image: url(https://www.independent.co.ug/wp-content/uploads/2019/07/makerere-university.jpg);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: auto; /* Full height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            max-width: 850px;
+            margin: auto;
+            padding-top: 80px;
+        }
+
+        .footer {
+            background-color: #343a40;
+            color: #4dd35e;
+            padding: 10px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sticky Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary text-white fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Makerere Sports Department</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'home' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Teams</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'player_list' %}">Registered Players</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Update Player Form -->
+    <div class="container mt-5 form-container">
+        <div class="card shadow">
+            <div class="card-header bg-success p-4 text-white bg-opacity-50">
+                <h5 class="mb-0">Update Player Information</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    {% csrf_token %}
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="id_student_name">Student's Name</label>
+                                <input type="text" name="student_name" id="id_student_name" class="form-control" value="{{ form.student_name.value }}" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="id_student_number">Student Number</label>
+                                <input type="text" name="student_number" id="id_student_number" class="form-control" 
+                                       value="{{ form.student_number.value }}" required 
+                                       pattern="\d{10}" 
+                                       minlength="10" 
+                                       maxlength="10"
+                                       title="Student Number must be exactly 10 digits.">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="id_dob">Date of Birth</label>
+                                <input type="date" name="dob" id="id_dob" class="form-control" value="{{ form.dob.value }}" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="id_sex">Sex</label>
+                                <select name="sex" id="id_sex" class="form-control" required>
+                                    <option value="" disabled selected>Select Sex</option>
+                                    <option value="M" {% if form.sex.value == "M" %}selected{% endif %}>Male</option>
+                                    <option value="F" {% if form.sex.value == "F" %}selected{% endif %}>Female</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="id_A_Level_School">A Level School</label>
+                        <input type="text" name="A_Level_School" id="id_A_Level_School" class="form-control" value="{{ form.A_Level_School.value }}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_course_of_study">Course of Study</label>
+                        <input type="text" name="course_of_study" id="id_course_of_study" class="form-control" value="{{ form.course_of_study.value }}" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="id_year_of_study">Year of Study</label>
+                        <input type="number" name="year_of_study" id="id_year_of_study" class="form-control" value="{{ form.year_of_study.value }}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_Hall_of_Residence">Hall of Residence</label>
+                        <input type="text" name="Hall_of_Residence" id="id_Hall_of_Residence" class="form-control" value="{{ form.Hall_of_Residence.value }}" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="id_main_sport">Main Sport</label>
+                        <input type="text" name="main_sport" id="id_main_sport" class="form-control" value="{{ form.main_sport.value }}" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="id_alternative_sport">Alternative Sport</label>
+                        <input type="text" name="alternative_sport" id="id_alternative_sport" class="form-control" value="{{ form.alternative_sport.value }}">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="id_playing_experience">Playing Experience</label>
+                        <textarea name="playing_experience" id="id_playing_experience" class="form-control">{{ form.playing_experience.value }}</textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="id_position">Position</label>
+                        <input type="text" name="position" id="id_position" class="form-control" value="{{ form.position.value }}">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="id_current_club">Current Club</label>
+                        <input type="text" name="current_club" id="id_current_club" class="form-control" value="{{ form.current_club.value }}">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="id_contact_information">Contact Information</label>
+                        <textarea name="contact_information" id="id_contact_information" class="form-control" required>{{ form.contact_information.value }}</textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="id_next_of_kin_name">Next of Kin's Name</label>
+                        <input type="text" name="next_of_kin_name" id="id_next_of_kin_name" class="form-control" value="{{ form.next_of_kin_name.value }}" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="id_next_of_kin_contacts">Next of Kin's Contacts</label>
+                        <textarea name="next_of_kin_contacts" id="id_next_of_kin_contacts" class="form-control" required>{{ form.next_of_kin_contacts.value }}</textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="id_food_allergy">Medical Information:<br> Food Allergy</label>
+                        <textarea name="food_allergy" id="id_food_allergy" class="form-control">{{ form.food_allergy.value }}</textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="id_injury_history">Injury History</label>
+                        <textarea name="injury_history" id="id_injury_history" class="form-control">{{ form.injury_history.value }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="id_registration_date">Date</label>
+                        <input type="date" name="registration_date" id="id_registration_date" class="form-control" value="{{ form.registration_date.value }}" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-success">Update Player</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.com/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+

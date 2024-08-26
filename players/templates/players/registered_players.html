@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registered Players</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>List of Registered Players</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Student Number</th>
+                    <th>Date of Birth</th>
+                    <th>Sex</th>
+                    <th>Course of Study</th>
+                    <th>Year of Study</th>
+                    <th>Main Sport</th>
+                    <th>Alternative Sport</th>
+                    <th>Playing Experience</th>
+                    <th>Position</th>
+                    <th>Current Club</th>
+                    <th>Contact Information</th>
+                    <th>Next of Kin's Name</th>
+                    <th>Next of Kin's Contacts</th>
+                    <th>Medical/Injury Information</th>
+                    <th>Signature</th>
+                    <th>Registration Date</th>
+                </tr>
+            </thead>
+            <tbody id="player-table-body">
+                <!-- Player data will be inserted here by JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // Fetch the player data from the API and insert it into the table
+        fetch("{% url 'get_all_players' %}")
+        .then(response => response.json())
+        .then(players => {
+            const tableBody = document.getElementById('player-table-body');
+            players.forEach(player => {
+                const row = `
+                    <tr>
+                        <td>${player.student_name}</td>
+                        <td>${player.student_number}</td>
+                        <td>${player.dob}</td>
+                        <td>${player.sex}</td>
+                        <td>${player.course_of_study}</td>
+                        <td>${player.year_of_study}</td>
+                        <td>${player.main_sport}</td>
+                        <td>${player.alternative_sport}</td>
+                        <td>${player.playing_experience}</td>
+                        <td>${player.position}</td>
+                        <td>${player.current_club}</td>
+                        <td>${player.contact_information}</td>
+                        <td>${player.next_of_kin_name}</td>
+                        <td>${player.next_of_kin_contacts}</td>
+                        <td>${player.medical_info}</td>
+                        <td>${player.signature}</td>
+                        <td>${player.registration_date}</td>
+                    </tr>
+                `;
+                tableBody.insertAdjacentHTML('beforeend', row);
+            });
+        });
+    </script>
+</body>
+</html>

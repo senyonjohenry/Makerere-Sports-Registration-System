@@ -1,0 +1,78 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin-top: 56px; /* Offset for fixed navbar */
+}
+
+.navbar {
+    background-color: #343a40 !important;
+}
+
+.navbar-brand, .nav-link {
+    color: #ffffff !important;
+    font-weight: bold;
+}
+
+.navbar-brand:hover, .nav-link:hover {
+    color: #ffc107 !important;
+}
+
+.card {
+    border-radius: 10px;
+}
+
+.card-header {
+    font-size: 1.25rem;
+    background-color: #28a745 !important;
+    color: #ffffff !important;
+    text-align: center;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.form-container {
+    max-width: 850px;
+    margin: auto;
+    padding-top: 80px;
+}
+
+.form-group label {
+    font-weight: bold;
+}
+
+.form-control {
+    border-radius: 5px;
+}
+
+.form-control:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
+}
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
+@media (max-width: 768px) {
+    .form-container {
+        padding-top: 20px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .navbar {
+        padding: 15px;
+    }
+}
