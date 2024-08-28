@@ -12,7 +12,10 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv 
 
+# Load environment variables from a .env file
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,12 +25,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-zzbgm53uj5&0_v6#dyan*98k17r1kjw+vqfdss3-o67amowyjb'
-
+#SECRET_KEY = 'django-insecure-zzbgm53uj5&0_v6#dyan*98k17r1kjw+vqfdss3-o67amowyjb'
+SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-zzbgm53uj5&0_v6#dyan*98k17r1kjw+vqfdss3-o67amowyjb')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG =  os.getenv('DEBUG', 'False') == 'False'
-ALLOWED_HOSTS = ['*']
-
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '*').split(',')
 
 # Application definition
 
@@ -79,19 +81,24 @@ WSGI_APPLICATION = 'sports_registration.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db', 'db.sqlite3'),  # Note the directory
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': os.getenv('DB_NAME', 'games_union'),
+#         'USER': os.getenv('DB_USER', 'makerere_games'),
+#         'PASSWORD': os.getenv('DB_PASSWORD', 'luiz@123'),
+#         'HOST': os.getenv('DB_HOST', 'localhost'),
+#         'PORT': os.getenv('DB_PORT', '3306'),
+#     }
+# }
+
 
 
 
