@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-zzbgm53uj5&0_v6#dyan*98k17r1kjw+vqfdss3-o67amowyjb'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG =  os.getenv('DEBUG', 'False') == 'True'
+DEBUG =  os.getenv('DEBUG', 'False') == 'False'
 ALLOWED_HOSTS = ['*']
 
 
@@ -143,5 +143,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+CSRF_COOKIE_SECURE = True  # Ensure this if you're using HTTPS
 
 
