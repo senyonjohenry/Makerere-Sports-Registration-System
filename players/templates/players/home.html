@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+{% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
     <style>
         body {
             background-color: #3a658f;
-            background-image: url(https://www.independent.co.ug/wp-content/uploads/2019/07/makerere-university.jpg);
+            background-image: url("{% static 'images/makerere-university.jpg' %}");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-        
+
             display: flex;
             justify-content: center;
             align-items: center;
@@ -37,21 +41,17 @@
 </head>
 <body>
     <div class="d-grid gap-2 col-6 mx-auto">
-    <div class="welcome-container">
-
-        <h2>Makerere University Sports Registration Platform</h2> <br>
-
-        {% csrf_token %}
-        
-        <a href="{% url 'register_player' %}"  class="btn btn-success" style="width: auto;">Register a Player</a> <br>
-        <a href="{% url 'player_list' %}" class="btn btn-success" style="width: auto;">List of Registered Players</a>
-
-    </div>
+        <div class="welcome-container">
+            <h2>Makerere University Sports Registration Platform</h2> <br>
+            <!-- Remove CSRF token since there are no forms -->
+            <a href="{% url 'register_player' %}" class="btn btn-success" style="width: auto;">Register a Player</a> <br>
+            <a href="{% url 'player_list' %}" class="btn btn-success" style="width: auto;">List of Registered Players</a>
+        </div>
     </div>
 
     <!-- Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 </body>
 </html>

@@ -4,18 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            background-image:  url("/static/images/makerere-university.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: auto; /* Full height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .card {
+            max-width: 400px;
+            margin: auto;
+            margin-top: 100px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            text-align: center;
+        }
+        .form-control, .btn {
+            border-radius: 30px;
+        }
+    </style>
 </head>
 <body>
-    <div class="container mt-5">
-        <h2>Login</h2>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="btn btn-primary">Login</button>
-        </form>
-        
+    <div class="container">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h3>Login Here</h3>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    <!-- Rendering the Django form fields with Bootstrap classes -->
+                    {{ form.as_p }}
+                    <div class="form-group text-center">
+                        <button type="submit" class="btn btn-success btn-block">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
+
+    <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
